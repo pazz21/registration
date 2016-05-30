@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend><h2>Registration Form</h2></legend>
+    <div id='personalDiv'></div>
+    NAME : <input type='text' id='Inputfname' placeholder='First Name'>
+    <input type='text' id='Inputlname' placeholder='Last Name'> <br>
+    <br>
+    ADDRESS : <input type='text' id='Inputaddress1' placeholder='Line 1'>
+    <input type='text' id='Inputaddress2' placeholder='Line 2'> <br><br>
+    CITY : <input type='text' id='Inputcity' placeholder='City'><br><br>
+    MOBILE : <input type='text' id='Inputmobile' placeholder='Mobile Number'> <br><br>
+    Create USER ID : <input type='text' id='InputUID' placeholder='Unique U-ID'> <br><br>
+    PASSWORD : <input type='password' id='Inputpassword' placeholder='password'> <br><br>
+
+
+  </fieldset>
+  </form>
+
+    <script>
+
+      var myDataRef = new Firebase('https://registrationview.firebaseio.com/');
+      $('#Inputpassword').keypress(function (e) {
+        if (e.keyCode == 13) {
+          var firstname = $('#Inputfname').val();
+          var lastname = $('#Inputlname').val();
+          var city = $('#Inputcity').val();
+          var address1 = $('#Inputaddress1').val();
+          var address2 = $('#Inputaddress2').val();
+          var mobile = $('#Inputmobile').val();
+          var userid = $('#InputUID').val();
+          var password = $('#Inputpassword').val();
+
+          myDataRef.push({firstname: firstname, lastname: lastname, city: city, address1: address1, address2: address2, mobile: mobile, userid: userid, password: password});
+          $('#Inputpassword').val('');
+        }
+      });
+      myDataRef.on('child_added', function(snapshot) {});
+
+    </script>
+
+
+    <form action="mailto:prashanth@cenixia.com" method="post" enctype="text/plain">
+      <fieldset>
+        <legend><h2>Other Personal Queries</h2></legend>
+    Name:<br>
+    <input type="text" name="name" placeholder="your name"><br>
+    E-mail:<br>
+    <input type="text" name="mail" placeholder="your email"><br>
+    Comment:<br>
+    <textarea name="message" rows="10" cols="50" placeholder="Comment your Queries here."></textarea><br><br>
+    <input type="submit" value="Send">
+    <input type="reset" value="Reset"><br>
+    </form>
+
+    </fieldset>
+
+
+  </body>
+</html>
